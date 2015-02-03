@@ -19,7 +19,7 @@ import ij.plugin.PlugIn;
  * @author antonio
  */
 public class Isotropic_Anomalous_Diffusion_2D_Filter implements PlugIn {
-//TODO Aprimorar plugin para rodar com imagestack, mesmo com processamento 2D. Rever filtro IAD, em questao do uso do parametro delta.
+//TODO  Rever filtro IAD, em questao do uso do parametro delta.
 
     final int imageDimension = 2;
 

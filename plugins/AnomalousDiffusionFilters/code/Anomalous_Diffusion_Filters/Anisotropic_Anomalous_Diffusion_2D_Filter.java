@@ -18,7 +18,6 @@ import ij.ImageStack;
  * @author antonio
  */
 public class Anisotropic_Anomalous_Diffusion_2D_Filter implements PlugIn {
-//TODO Aprimorar plugin para rodar com imagestack, mesmo com processamento 2D.
 
     final int imageDimension = 2;
 
