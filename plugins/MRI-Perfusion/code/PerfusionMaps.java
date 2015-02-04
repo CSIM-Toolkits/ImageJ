@@ -7,19 +7,12 @@ package Perfusion_v1_1;
 
 import ij.IJ;
 import ij.ImagePlus;
-import ij.ImageStack;
 import ij.WindowManager;
-import ij.gui.NewImage;
 import ij.gui.Roi;
-import ij.measure.ResultsTable;
 import ij.plugin.ContrastEnhancer;
 import ij.process.ImageProcessor;
-import ij.process.LUT;
 import ij.util.DicomTools;
-import java.awt.Color;
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.image.IndexColorModel;
 
 /**
  *

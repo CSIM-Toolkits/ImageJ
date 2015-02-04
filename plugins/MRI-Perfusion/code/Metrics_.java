@@ -8,12 +8,9 @@ package Perfusion_v1_1;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;
-import ij.gui.Plot;
 import ij.gui.Roi;
 import ij.measure.ResultsTable;
 import ij.plugin.PlugIn;
-import ij.util.DicomTools;
-import ij.LookUpTable;
 import ij.gui.GenericDialog;
 
 /**

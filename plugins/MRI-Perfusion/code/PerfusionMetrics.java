@@ -97,10 +97,10 @@ public class PerfusionMetrics extends Metrics_ {
     protected static double timeCalculation(double[] pixelGray, ImagePlus img) {
 //        double TR;
         double timePeak = 0.0d;
-        double min = 0.0d;
+        double min = pixelGray[0];
         double timePerImage = getTimeAcquisition(img);
 //        TR = Double.parseDouble(DicomTools.getTag(img, "0018,0080"));
-        for (int i = 0; i < pixelGray.length; i++) {
+        for (int i = 1; i < pixelGray.length; i++) {
             if (pixelGray[i] < min) {
                 min = pixelGray[i];
                 timePeak = (double) (i + 1);
@@ -347,8 +347,8 @@ public class PerfusionMetrics extends Metrics_ {
                 table.addValue("Time to Peack: Pixel " + i + " (" + img.getCalibration().getTimeUnit() + ")", timeCalculation(data.getColumnAsDoubles(i), img));
                 times[i] = timeCalculation(data.getColumnAsDoubles(i), img);
             }
-            table.addValue("Time to Peak: Mean", mean(times));
-            table.addValue("Time to Peak: Std", std(times));
+            table.addValue("Time to Peak: Mean (" + img.getCalibration().getTimeUnit() + ")", mean(times));
+            table.addValue("Time to Peak: Std (" + img.getCalibration().getTimeUnit() + ")", std(times));
         } else {
             IJ.showMessage("Time to Peak", "No DICOM Header tag to Repetition Time was found.");
             table.addValue("Time to Peak", 0);

@@ -7,19 +7,10 @@ package Perfusion_v1_1;
 
 import ij.IJ;
 import ij.ImagePlus;
-import ij.LookUpTable;
 import ij.WindowManager;
 import ij.gui.GenericDialog;
 import ij.gui.Roi;
 import ij.plugin.PlugIn;
-import ij.process.LUT;
-import ij.util.DicomTools;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.image.LookupTable;
-import java.io.File;
-import java.util.Vector;
 
 /**
  *
