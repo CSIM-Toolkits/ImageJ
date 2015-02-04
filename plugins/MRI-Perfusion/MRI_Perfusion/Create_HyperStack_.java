@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Perfusion_v1_1;
+package MRI_Perfusion;
 
 import ij.IJ;
 import ij.ImagePlus;

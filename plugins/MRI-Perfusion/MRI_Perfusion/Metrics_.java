@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Perfusion_v1_1;
+package MRI_Perfusion;
 
+import classes.PerfusionMetrics;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;
