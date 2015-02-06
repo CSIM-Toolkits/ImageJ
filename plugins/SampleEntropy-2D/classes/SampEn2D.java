@@ -12,7 +12,7 @@ package classes;
 public class SampEn2D {
     
     public double fastSampleEn2D(ImageAccess image, int m, double r) {
-        long startTime = System.currentTimeMillis();
+//        long startTime = System.currentTimeMillis();
         double tol = r * BasicStatistic.std(image);
         //System.out.println("Image STDEV: "+BasicStatistics.std(image));
 
@@ -85,7 +85,7 @@ public class SampEn2D {
         //System.out.println("SE: "+(- Math.log( ((double)Cm1)/((double)Cm) )));
         double se = -Math.log(((double) Cm1) / ((double) Cm));
 
-        long finishTime = System.currentTimeMillis();
+//        long finishTime = System.currentTimeMillis();
         //System.out.println("Execution time: "+((finishTime - startTime)/1000.0));
 
         return se;
