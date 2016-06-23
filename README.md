@@ -20,7 +20,7 @@ After download this ImageJ repository, copy the Jar file of your interest and pa
 
 # Documentation
 
-All methods have a wiki page in [www.image.net](www.imagej.net/CSIMLab) that explains more about each PlugIn functionalities and parameters settings.
+All methods have a wiki page in [www.image.net](http://www.imagej.net/CSIMLab) that explains more about each PlugIn functionalities and parameters settings.
 
 # Citation and References
 
