@@ -1,7 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Two-dimensional Sample Entropy
+ *
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the Creative Common v4.0 License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package Sample_Entropy_2D;
 
@@ -15,13 +27,16 @@ import ij.measure.ResultsTable;
 import ij.IJ;
 
 /**
- *
- * @author antonio
+ * SampEn2D - Two-dimensional Sample Entropy
+ * 
+ * This is a simple GUI to apply SampEn2D algorithm over digital images.
+ * At the moment, the GUI offer the possibility to calculate over a single 2D image or over a 2D image stack
+ * If you have an image stack, the results table will show up following the slice order. Additionally, if you want to 
+ * calculate the SampEn2D over one single slice, leave the "Apply to all the images?" unchecked.
+ *  
  */
 public class SampEn_2D_ implements PlugInFilter {
-
-    private final String[] labelsCheckbox = {"Mean", "Standard Dev.", "Minimum", "Maximum", "Sample Entropy"};
-    private final boolean[] defaultCheckbox = {true, true, true, true, true};
+       
     private ResultsTable table = new ResultsTable();
     ImagePlus img;
     SampEn2D se = new SampEn2D();
@@ -30,6 +45,10 @@ public class SampEn_2D_ implements PlugInFilter {
 
     @Override
     public int setup(String string, ImagePlus ip) {
+        if (ip == null) {
+            IJ.noImage();
+            return 0;
+        }
         img = ip.duplicate();
 
         return DOES_16 + DOES_8G;
@@ -39,8 +58,7 @@ public class SampEn_2D_ implements PlugInFilter {
     public void run(ImageProcessor ip) {
         if (img.getNSlices() > 1) {
             GenericDialog gd = new GenericDialog("Sample Entropy 2D");
-            gd.addMessage("Set the measurements:");
-            gd.addCheckboxGroup(3, 2, labelsCheckbox, defaultCheckbox);
+            gd.addMessage("Parameters set:");
             gd.addNumericField("m", 1.0, 3);
             gd.addNumericField("r", 0.3, 3);
             gd.addCheckbox("Use the standard deviation as a threshold delimiter?", true);
@@ -52,11 +70,6 @@ public class SampEn_2D_ implements PlugInFilter {
             }
 
             if (gd.wasOKed()) {
-                boolean meanChoice = gd.getNextBoolean();
-                boolean stdChoice = gd.getNextBoolean();
-                boolean minChoice = gd.getNextBoolean();
-                boolean maxChoice = gd.getNextBoolean();
-                boolean seChoice = gd.getNextBoolean();
                 boolean doStdThresholdChoice = gd.getNextBoolean();
                 boolean doAllStackChoice = gd.getNextBoolean();
 
@@ -67,24 +80,12 @@ public class SampEn_2D_ implements PlugInFilter {
                 if (doAllStackChoice) {
                     for (int slice = 1; slice <= img.getNSlices(); slice++) {
                         IJ.showProgress(slice, img.getNSlices());
-                        IJ.showStatus("Calculating SampEn 2D metrics...Slice " + slice + "...please wait");
+                        IJ.showStatus("Calculating SampEn2D...Slice " + slice + "...please wait");
                         img.setSlice(slice);
 
                         table.incrementCounter();
-                        if (meanChoice) {
-                            table.addValue("Mean", img.getProcessor().getStatistics().mean);
-                        }
-                        if (stdChoice) {
-                            table.addValue("Std", img.getProcessor().getStatistics().stdDev);
-                        }
-                        if (minChoice) {
-                            table.addValue("Minimum", img.getProcessor().getStatistics().min);
-                        }
-                        if (maxChoice) {
-                            table.addValue("Maximum", img.getProcessor().getStatistics().max);
-                        }
-                        if (seChoice && doStdThresholdChoice) {
-                            table.addValue("SampEn2D", se.fastSampleEn2D(new ImageAccess(img.getProcessor()), m, r * img.getProcessor().getStatistics().stdDev));
+                            if (doStdThresholdChoice) { 
+                           table.addValue("SampEn2D", se.fastSampleEn2D(new ImageAccess(img.getProcessor()), m, r * img.getProcessor().getStatistics().stdDev));
                         } else {
                             table.addValue("SampEn2D", se.fastSampleEn2D(new ImageAccess(img.getProcessor()), m, r));
                         }
@@ -93,19 +94,7 @@ public class SampEn_2D_ implements PlugInFilter {
                 } else {
                     IJ.showStatus("Calculating SampEn 2D metrics...please wait");
                     table.incrementCounter();
-                    if (meanChoice) {
-                        table.addValue("Mean", img.getProcessor().getStatistics().mean);
-                    }
-                    if (stdChoice) {
-                        table.addValue("Std", img.getProcessor().getStatistics().stdDev);
-                    }
-                    if (minChoice) {
-                        table.addValue("Minimum", img.getProcessor().getStatistics().min);
-                    }
-                    if (maxChoice) {
-                        table.addValue("Maximum", img.getProcessor().getStatistics().max);
-                    }
-                    if (seChoice && doStdThresholdChoice) {
+                        if (doStdThresholdChoice) {
                         table.addValue("SampEn2D", se.fastSampleEn2D(new ImageAccess(img.getProcessor()), m, r * img.getProcessor().getStatistics().stdDev));
                     } else {
                         table.addValue("SampEn2D", se.fastSampleEn2D(new ImageAccess(img.getProcessor()), m, r));
@@ -116,8 +105,7 @@ public class SampEn_2D_ implements PlugInFilter {
             }
         } else {
             GenericDialog gd = new GenericDialog("Sample Entropy 2D");
-            gd.addMessage("Set the measurements:");
-            gd.addCheckboxGroup(3, 2, labelsCheckbox, defaultCheckbox);
+            gd.addMessage("Parameters set:");
             gd.addNumericField("m", 1.0, 3);
             gd.addNumericField("r", 0.3, 3);
             gd.addCheckbox("Use the standard deviation as a threshold delimiter?", true);
@@ -128,33 +116,16 @@ public class SampEn_2D_ implements PlugInFilter {
             }
 
             if (gd.wasOKed()) {
-                boolean meanChoice = gd.getNextBoolean();
-                boolean stdChoice = gd.getNextBoolean();
-                boolean minChoice = gd.getNextBoolean();
-                boolean maxChoice = gd.getNextBoolean();
-                boolean seChoice = gd.getNextBoolean();
                 boolean doStdThresholdChoice = gd.getNextBoolean();
 
                 m = (int) gd.getNextNumber();
                 r = gd.getNextNumber();
                 table.setPrecision(4);
 
-                IJ.showStatus("Calculating SampEn 2D metrics...please wait");
+                IJ.showStatus("Calculating SampEn2D...please wait");
 
                 table.incrementCounter();
-                if (meanChoice) {
-                    table.addValue("Mean", img.getProcessor().getStatistics().mean);
-                }
-                if (stdChoice) {
-                    table.addValue("Std", img.getProcessor().getStatistics().stdDev);
-                }
-                if (minChoice) {
-                    table.addValue("Minimum", img.getProcessor().getStatistics().min);
-                }
-                if (maxChoice) {
-                    table.addValue("Maximum", img.getProcessor().getStatistics().max);
-                }
-                if (seChoice && doStdThresholdChoice) {
+                     if (doStdThresholdChoice) {
                     table.addValue("SampEn2D", se.fastSampleEn2D(new ImageAccess(img.getProcessor()), m, r * img.getProcessor().getStatistics().stdDev));
                 } else {
                     table.addValue("SampEn2D", se.fastSampleEn2D(new ImageAccess(img.getProcessor()), m, r));

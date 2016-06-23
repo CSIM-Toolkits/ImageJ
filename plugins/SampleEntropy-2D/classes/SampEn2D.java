@@ -1,20 +1,32 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Two-dimensional Sample Entropy
+ *
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the Creative Common v4.0 License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package classes;
 
 /**
- *
- * @author antonio
+ * SampEn2D - Two-dimensional Sample Entropy
+ * 
+ * This is the class that defines the SampEn2D algorithm.
+ *   
  */
 public class SampEn2D {
     
     public double fastSampleEn2D(ImageAccess image, int m, double r) {
-//        long startTime = System.currentTimeMillis();
         double tol = r * BasicStatistic.std(image);
-        //System.out.println("Image STDEV: "+BasicStatistics.std(image));
 
         int nx = image.getWidth();
         int ny = image.getHeight();
@@ -31,13 +43,10 @@ public class SampEn2D {
         for (int yi = 0; yi < ny - m; yi++) {
             for (int xi = 0; xi < nx - m; xi++) {
 //            if(new Double(image.getPixel(xi, yi)).equals(Double.NaN))
-//                System.out.println("pixel("+xi+","+yi+") = NaN");
-//            System.out.println("("+xi+","+yi+"), B = "+B);
 
                 // Counters of similar patterns for m and m+1
                 Cim = Cim1 = 0;
 
-                // Acabar a linha atual
                 int yj = yi;
                 int xj = xi + 1;
                 while (xj < nx - m) {
@@ -55,7 +64,6 @@ public class SampEn2D {
                     xj++;
                 }
 
-                // Proximas linhas
                 for (yj = yi + 1; yj < ny - m; yj++) {
                     for (xj = 0; xj < nx - m; xj++) {
                         if (similar(image, xi, yi, xj, yj, m, tol)) {  // Similar for M?
@@ -79,14 +87,7 @@ public class SampEn2D {
         Cm /= den;
         Cm1 /= den;
 
-        //System.out.println("A="+A+", B="+B);
-        //System.out.println("SE: "+(- Math.log( ((double)A)/((double)B) )));
-        //System.out.println("\nCm="+Cm+", Cm1="+Cm1);
-        //System.out.println("SE: "+(- Math.log( ((double)Cm1)/((double)Cm) )));
         double se = -Math.log(((double) Cm1) / ((double) Cm));
-
-//        long finishTime = System.currentTimeMillis();
-        //System.out.println("Execution time: "+((finishTime - startTime)/1000.0));
 
         return se;
     }
