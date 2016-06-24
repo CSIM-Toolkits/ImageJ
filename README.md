@@ -1,6 +1,8 @@
 # ImageJ
 
-This is a repository for ImageJ plugins, macros and scripts that were developed in Computing in Signals and Images in Medicine Laboratory (CSIM). 
+This is a repository for ImageJ plugins, macros and scripts that were developed in Computing in Signals and Images in Medicine Laboratory (CSIM). Here it is available the Java source code and scripts for each application, where you can download and adapt for your needs. Additionally, if you want purpose an improvement for any of our methods, please fork this repository and send us a pull request.
+
+Please, note that the ImageJ version which we are working on is related with the Fiji project (ImageJ2). Visit the [Fiji wiki](http://fiji.sc/) for more informations.
 
 ## Available Methods 
 
@@ -14,9 +16,12 @@ This is a repository for ImageJ plugins, macros and scripts that were developed 
 
 ## PlugIns
 
-After download this ImageJ repository, copy the Jar file of your interest and paste it inside the "plugin" folder, which is located inside the ImageJ software folder (in your system). 
-
-*Example: Assume that you want to use the SampEn2D method. First, find the SampEn2D_.jar file inside the repository folder, previously downloaded, and copy it. Go to the ImageJ folder in your system, e.g. for Windows systems could be located at C:/user/Programs/ImageJ/plugins, and paste the file inside it. Run ImageJ and find the plugin, called Sample Entropy 2D, located at the Plugin menu. 
+The easiest way to install our Plugins is using the Updater menu provided in ImageJ.
+	1. Click on Help > Update...
+	2. Click on "Manage update sites" button and check the "CSIM Laboratory" option
+	3. Click on Close button 
+	4. Choose the tools that you want to install. Please, note that some of our tools have depencies with each other, and for this reason some additional plugins may be needed to install. Do not worry about it, because ImageJ identify those depencies automatically.
+	4. Restart ImageJ and go to Plugins menu to find the new PlugIns that you just installed
 
 # Documentation
 
