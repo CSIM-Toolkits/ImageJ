@@ -26,7 +26,8 @@ package classes;
 public class SampEn2D {
     
     public double fastSampleEn2D(ImageAccess image, int m, double r) {
-        double tol = r * BasicStatistic.std(image);
+//        double tol = r * image.createFloatProcessor().getStatistics().stdDev;
+        double tol = r;
 
         int nx = image.getWidth();
         int ny = image.getHeight();

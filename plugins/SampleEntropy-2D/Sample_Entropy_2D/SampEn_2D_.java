@@ -75,7 +75,7 @@ public class SampEn_2D_ implements PlugInFilter {
 
                 m = (int) gd.getNextNumber();
                 r = gd.getNextNumber();
-                table.setPrecision(4);
+                table.setPrecision(8);
 
                 if (doAllStackChoice) {
                     for (int slice = 1; slice <= img.getNSlices(); slice++) {
@@ -120,7 +120,7 @@ public class SampEn_2D_ implements PlugInFilter {
 
                 m = (int) gd.getNextNumber();
                 r = gd.getNextNumber();
-                table.setPrecision(4);
+                table.setPrecision(8);
 
                 IJ.showStatus("Calculating SampEn2D...please wait");
 
