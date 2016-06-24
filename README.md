@@ -2,7 +2,7 @@
 
 This is a repository for ImageJ plugins, macros and scripts that were developed in Computing in Signals and Images in Medicine Laboratory (CSIM). Here it is available the Java source code and scripts for each application, where you can download and adapt for your needs. Additionally, if you want purpose an improvement for any of our methods, please fork this repository and send us a pull request.
 
-Please, not that the ImageJ version which we are working on is related with the Fiji project (ImageJ2). Visit the [Fiji wiki](http://fiji.sc/) for more informations.
+Please, note that the ImageJ version which we are working on is related with the Fiji project (ImageJ2). Visit the [Fiji wiki](http://fiji.sc/) for more informations.
 
 ## Available Methods 
 
